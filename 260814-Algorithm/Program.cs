@@ -89,7 +89,12 @@
                     continue;
                 }
 
-                bool isPalindrome = NumberPatternChecker.CheckPalindrome(input, out ulong reversed);
+                bool isSucceedToCheckPalindrome = NumberPatternChecker.TryCheckPalindrome(input, out bool isPalindrome, out ulong reversed);
+                if (!isSucceedToCheckPalindrome)
+                {
+                    InputKeyToClear("잘못된 입력입니다.");
+                    continue;
+                }
 
                 Console.WriteLine();
                 Console.WriteLine($"뒤집은 숫자 : {reversed}");

@@ -24,20 +24,32 @@ namespace _260814_Algorithm
          * answer와 input이 같다면 팰린드롬 여부 O
          * 아니면 X 
          */
-        public static bool CheckPalindrome(ulong input, out ulong reversedInput)
+        public static bool TryCheckPalindrome(ulong input, out bool isPalindrome, out ulong reversedInput)
         {
             ulong leftNumber = input;
             reversedInput = 0;
 
-            while (leftNumber != 0)
+            try
             {
-                reversedInput *= 10;
-                reversedInput += leftNumber % 10;
+                checked // 곱하기 10 하다가 오버플로우 나는 거 방지용 - 예시 : ulong 범위 내인 10000000000000000009는 뒤집었을 때 오버플로우가 남
+                {
+                    while (leftNumber != 0)
+                    {
+                        reversedInput *= 10;
+                        reversedInput += leftNumber % 10;
 
-                leftNumber /= 10;
+                        leftNumber /= 10;
+                    }
+                }
+            }
+            catch
+            {
+                isPalindrome = false;
+                return false;
             }
 
-            return reversedInput == input;
+            isPalindrome = reversedInput == input;
+            return true;
         }
 
         /* 
