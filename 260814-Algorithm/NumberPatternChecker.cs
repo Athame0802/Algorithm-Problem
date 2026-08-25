@@ -31,8 +31,9 @@ namespace _260814_Algorithm
 
             try
             {
-                checked // 곱하기 10 하다가 오버플로우 나는 거 방지용 - 예시 : ulong 범위 내인 10000000000000000009는 뒤집었을 때 오버플로우가 남
+                checked // 곱하기 10 하다가 오버플로우 나는 거 방지용 - 예시 : ulong 범위(약 1845경) 내인 10000000000000000009(1000경 9)는 뒤집었을 때(9000경 1) 오버플로우가 남
                 {
+                    // reversedInput의 자릿수를 밀어가며 남은 숫자의 % 10 넣기 | 남은 수: 1234, reversed: 5 > 남은 수: 123, reversed: 54
                     while (leftNumber != 0)
                     {
                         reversedInput *= 10;
@@ -90,12 +91,12 @@ namespace _260814_Algorithm
             int maxContinuousLength = 1;
             int currentContinuousLength = 1;
 
-            for (int i = 1; i < inputs.Length; i++)
+            for (int i = 1; i < inputs.Length; i++) // i는 1부터 시작 - 사유 : 1부터 시작해서 연속이 있다면 뒷 인덱스 기준으로 검사 + inputs[i - 1]에 접근하려고
             {
-                bool isStraight = inputs[i - 1] + 1 == inputs[i];
-                if (isStraight)
+                bool isContinuous = inputs[i - 1] + 1 == inputs[i];
+                if (isContinuous)
                 {
-                    currentContinuousLength++; // i번째 반영
+                    currentContinuousLength++; // i번째 반영 (i - 1은 반영 X)
                     continue;
                 }
 
