@@ -33,6 +33,8 @@ namespace _260821_Algorithm
          * 
          * 
          * 파스칼의 삼각형
+         * (n 0) = 1, (n, n) = 1
+         * (n r) = (n-1 r-1) + (n-1 r) << 특정 하나를 뽑았고 나머지 중에서 r-1개(하나 이미 뽑아서 -1)를 뽑는 경우 + 특정 하나를 제외하고 나머지 중에서 r개를 뽑는 경우
          * 
          *     0   1   2   3   4   5
          * 0:  1
@@ -53,7 +55,7 @@ namespace _260821_Algorithm
          * >> 피보나치(a + 1)
          * 
          * 피보나치 클래스 따로 구현
-         * 메모이제이션해서 Dictionary로 구현
+         * 메모이제이션해서 Dictionary 같은 컬렉션으로? 구현
          */
 
         public static bool TryCountJump1Or2StairCase(byte inputIndex, out ulong result)
